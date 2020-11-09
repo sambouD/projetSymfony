@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+    {# titre #}
+    {% block title %} 
+        Yooo ! Ici c'est le best réseau!
+    {% endblock %}
+        
+    {# header #}
+    {% block header %}
+        <h2>Voici le leader</h2>
+    {% endblock  %}
+
+{% block body %}
+<div class="class container">
+    <div class="jumbotron mt-3">
+        <h1 class="display-3">Bienvenue sur BNBLE!</h1>
+        <p class="lead">Nous mettons en relation les voyageurs et les propriétaire qui veulent profiter d'opportunités et gagner de l'argent en proposant leur bien à la location !</p>
+        <hr class="my-4">
+        <p> Vous êtes voyageur ? Et vous voulez voir ou pourrez loger pour votre prochain déplacement ?</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Voir nos annonces</a>
+        </p>
+    </div>
+    <h2 class="h1 my-5">Nos appartements stars</h2>
+
+{% endblock %}

@@ -3,10 +3,23 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+         <link rel="stylesheet" href="/css/bootstrap.min.css">
+              <!-- Font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.0/css/all.css" 
+    integrity="sha384-OLYO0LymqQ+uHXELyx93kblK5YIS3B2ZfLGBmsJaUyor7CpMTBsahDHByqSuWW+q" crossorigin="anonymous">
+
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+
+    {% include "Partials/header.html.twig" %}
         {% block body %}{% endblock %}
+
+        {# javaScript #}
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/popper.min.js"></script>
+        <script src="/js/boostrap.min.js"></script>
+
         {% block javascripts %}{% endblock %}
     </body>
 </html>
