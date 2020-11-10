@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\ActiviteComplet;
+use App\Entity\Medicament;
 use Faker\Factory;
 use App\Entity\Praticien;
 use App\Entity\Visiteur;
@@ -31,9 +32,9 @@ class Visiteurfixtures extends Fixture
             $manager->persist($activiteComplet);
         }
 
-        
         //Praticien
         $genres = ["male" , "female"];
+
         for ($i=1; $i <=30 ; $i++) { 
             # code...
             $praticien = new Praticien();
@@ -46,11 +47,11 @@ class Visiteurfixtures extends Fixture
         }
 
         //Visiteur
+
         for ($i=0; $i <= 40; $i++) { 
             $visiteur = new Visiteur();
 
-            $genre = $faker->firstName($faker->lastName());
-            $genres = $faker->lastName($faker->lastName($genres[mt_rand(0,1)]));
+       
             $login = $faker->userName();
             $mdp = $faker->password();
             $adresse = $faker->address();
@@ -58,8 +59,8 @@ class Visiteurfixtures extends Fixture
             $ville = $faker->city(); 
             $dateEmbauche = $faker->dateTimeBetween('-20 years' , 'now');                               
 
-            $visiteur->setNom($genre)
-                     ->setPrenom($genres)
+            $visiteur->setNom($faker->lastName())
+                     ->setPrenom($faker->lastName($genres[mt_rand(0,1)]))
                      ->setLogin($login)
                      ->setMdp($mdp)
                      ->setAdresse($adresse)
@@ -69,6 +70,25 @@ class Visiteurfixtures extends Fixture
         
             $manager->persist($visiteur);  
         }
+
+    //Medicament
+
+        $medicaments=fopen(__DIR__."/medicaments.csv","r");
+        while (!feof($medicaments)) {
+          $lesmedicaments[]=fgetcsv($medicaments);
+        }
+        fclose($medicaments);
+
+    foreach ($lesmedicaments as $value) {
+      $medicament = new Medicament();
+      $medicament->setId(intval($value[0]))
+                ->setLibelle($value[1]);
+        
+        $manager->persist($medicament); 
+    }
+
+    //rapport_visite
+    
 
         $manager->flush();
     }
