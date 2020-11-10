@@ -13,7 +13,7 @@ class RapportController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('rapport/index.html.twig', [
+        return $this->render('/index.html.twig', [
             'controller_name' => 'RapportController',
         ]);
     }
