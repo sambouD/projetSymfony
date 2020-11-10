@@ -20,7 +20,7 @@ class ActiviteComplet
     private $id;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $ac_Date;
 
@@ -55,12 +55,12 @@ class ActiviteComplet
         return $this->id;
     }
 
-    public function getAcDate(): ?\DateTimeInterface
+    public function getAcDate(): ?\DateTime
     {
         return $this->ac_Date;
     }
 
-    public function setAcDate(\DateTimeInterface $ac_Date): self
+    public function setAcDate(\DateTime $ac_Date): self
     {
         $this->ac_Date = $ac_Date;
 
