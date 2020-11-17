@@ -112,19 +112,19 @@ class Visiteurfixtures extends Fixture
 
     //rapport_visite
     $rapport_visites = []; // Foreign Key
-
+    $rap_motif = ["Périodicité", "Actualisation", "Relance", "Sollicitation praticien", "Autre"];
     for ($i=0; $i <=30; $i++) { 
         $rapport_visite = new RapportVisite();
 
         $rap_date = $faker->dateTimeBetween('-10 years' , 'now');  
-        $rap_motif= $faker->text(10);
+     
         $rap_bilan = $faker->sentence(3, true);
 
         $rapport_visite->setVisiteur($visiteurs[mt_rand(0,30)])
                         ->setPraticien($praticiens[mt_rand(0,30)])
                         ->setRapDate($rap_date)
                         ->setRapBilan($rap_bilan)
-                        ->setRapMotif($rap_motif);
+                        ->setRapMotif($rap_motif[mt_rand(0,4)]);
 
         $manager->persist($rapport_visite); 
         $rapport_visites[] = $rapport_visite; // Foreign Key
