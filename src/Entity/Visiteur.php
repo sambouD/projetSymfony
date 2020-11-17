@@ -6,11 +6,12 @@ use App\Repository\VisiteurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=VisiteurRepository::class)
  */
-class Visiteur
+class Visiteur implements UserInterface
 {
     /**
      * @ORM\Id
@@ -232,4 +233,22 @@ class Visiteur
 
         return $this;
     }
+
+    public function getRoles() {
+        return ['ROLE_USER'];
+    }
+
+    public function getPassword()
+    {
+        return $this->mdp;
+    }
+
+    public function getSalt() {}
+
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    public function eraseCredentials() {}
 }

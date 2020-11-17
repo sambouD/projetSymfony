@@ -12,9 +12,17 @@ use App\Entity\RapportVisite;
 use App\Entity\Visiteur;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\User;
 
 class Visiteurfixtures extends Fixture
 {
+    private $encoder;
+
+    public function __construct(UserPasswordEncoderInterface $encoder){
+        $this->encoder = $encoder;
+    }
+
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create('FR-fr');
@@ -66,12 +74,14 @@ class Visiteurfixtures extends Fixture
             $adresse = $faker->address();
             $cp = $faker->postcode();
             $ville = $faker->city(); 
-            $dateEmbauche = $faker->dateTimeBetween('-20 years' , 'now');                               
+            $dateEmbauche = $faker->dateTimeBetween('-20 years' , 'now');        
+            
+            $hash = $this->encoder->encodePassword($visiteur, $mdp);
 
             $visiteur->setNom($faker->lastName())
                      ->setPrenom($faker->lastName($genres[mt_rand(0,1)]))
                      ->setLogin($login)
-                     ->setMdp($mdp)
+                     ->setMdp($hash)
                      ->setAdresse($adresse)
                      ->setCp($cp)
                      ->setVille($ville)
