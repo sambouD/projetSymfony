@@ -2,9 +2,10 @@
 
 namespace App\Form;
 
-use App\Entity\Medicament;
 use App\Entity\Offrir;
+use App\Form\OffrirType;
 use App\Entity\Praticien;
+use App\Entity\Medicament;
 use App\Entity\RapportVisite;
 use App\Form\ApplicationType;
 use Symfony\Component\Form\AbstractType;
@@ -12,6 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -23,8 +25,10 @@ class RapportType extends ApplicationType
     {
         $builder
         ->add('id', IntegerType::class, 
-        $this->getConfiguration('Numéro: ', "Veuillez saisir le numéro")
-        )
+        $this->getConfiguration('Numéro: ', "Veuillez saisir le numéro",[
+            'required' => false
+        ]
+        ))
         ->add('rap_date', 
             DateType::class,[
             'widget' => 'single_text',
@@ -34,23 +38,33 @@ class RapportType extends ApplicationType
             'class' => Praticien::class,
             'choice_label' =>  'nom' 
         ])
-        ->add('rap_motif', EntityType::class, [
-            'class' => RapportVisite::class,
-            'choice_label' =>  'rap_motif',
-            'label' => 'Motif: '
+        ->add('rap_motif', ChoiceType::class, [
+            'choices' => [
+                'Périodicité' => 0,
+                'Actualisation' => 1,
+                'Relance' => 2,
+                'Autre' => 3
+            ]
 
         ])
         ->add('rap_bilan', 
         TextareaType::class,
         $this->getConfiguration("Bilan: ", "Donner le bilan détaillé")
         )
-        ->add('offrirs', EntityType::class, [
+        /*->add('offrirs', EntityType::class, [
             'class' => Medicament::class,
             'choice_label' => 'libelle',
             'label' => 'Produit: '
-        ])
-        
-        ;
+        ])*/
+        ->add('offrirs', CollectionType::class, 
+        [
+            'entry_type' => OffrirType::class,
+            'allow_add' => true
+            
+            
+        ]
+        )
+    ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

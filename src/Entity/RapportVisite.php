@@ -35,7 +35,8 @@ class RapportVisite
     private $rap_motif;
 
     /**
-     * @ORM\OneToMany(targetEntity=Offrir::class, mappedBy="rapport_visite")
+     * @ORM\OneToMany(targetEntity=Offrir::class, mappedBy="rapport_visite",  cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $offrirs;
 

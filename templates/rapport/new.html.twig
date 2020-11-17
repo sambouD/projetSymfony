@@ -4,6 +4,8 @@
     Rapport de visite
 {% endblock %}
 
+{% form_theme form _self %}
+
 {% block body %}
     
     <div class="container">
@@ -15,10 +17,67 @@
         {{ form_widget(form) }}
 
         <button type="submit" class="btn btn-primary">Créer</button>
-        
+
         {{ form_end(form) }}
-
-
     </div>
+
+{% endblock %}
+{% block _rapport_offrirs_widget %}
+    <p>Ici, vous pouvez ajouter vos propres medicament ! </p>
+
+    {{ form_widget(form) }}
+    <div class="form-group">
+        <button type="button" id="add-offrir" class="btn btn-primary">Ajouter un médicament</button>
+    </div>
+{% endblock %}
+
+{% block _rapport_offrirs_entry_row %}
+
+    {{ form_widget(form) }}
+{% endblock %}
+
+{% block _rapport_offrirs_entry_widget %}
+    <div class="form-group" id="block_{{ id}}">
+            <div class="col-10">
+            
+                <div class="row">
+                    <div class="col">
+                    {{ form_widget(form.medicament) }}
+                    </div>
+                    <div class="col">
+                        {{ form_widget(form.off_qte)}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <button type="button" data-action="delete" data-target="#block_{{id}}" class="btn btn-danger">X</button>
+            </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $('#add-offrir').click(function(){
+            //Je récupère le numéro des futures champs que je créer
+            const index = $('#rapport_offrirs div.form-group').length
+
+            //je récupère le prototype des entrées 
+            const tmpl = $('#rapport_offrirs').data('prototype').replace(/__name__/g, index);
+
+            // j'injecte ce code au sein de la div
+            $('#rapport_offrirs').append(tmpl);
+
+            // je gére le button supprimer
+            handleDeleButtons();
+        });
+    
+    function handleDeleButtons(){
+        $('button[data-action= "delete"]').click(function(){
+            const target = this.dataset.target
+            $(target).remove();
+        });
+    }
+    </script>
 
 {% endblock %}
