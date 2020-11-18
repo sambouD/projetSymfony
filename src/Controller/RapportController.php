@@ -61,5 +61,8 @@ class RapportController extends AbstractController
         return $this->render('rapport/new.html.twig',[
             'form' => $form->createView()
         ]);
+
+       
     }
+   
 }
