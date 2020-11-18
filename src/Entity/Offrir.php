@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\OffrirRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\OffrirRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=OffrirRepository::class)
@@ -25,6 +26,7 @@ class Offrir
     /**
      * @ORM\ManyToOne(targetEntity=Medicament::class, inversedBy="offrirs")
      * @ORM\JoinColumn(nullable=false)
+     * 
      */
     private $medicament;
 
