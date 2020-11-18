@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification du rapport numéro{{rapport.id}}{% endblock %}
+{% block body %}
+
+<div class="container">
+<h1>Modification du rapport du  {{rapport.rapdate | date('d/m/Y ')}}</h1>
+{{form_start(form)}}
+
+{{form_widget(form)}}
+
+{{form_end(form)}}
+</div>
+{% endblock %}

@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\RapportVisite;
+use App\Form\RapportType;
 use App\Repository\RapportVisiteRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class VisiteurRapportController extends AbstractController
 {
@@ -25,6 +27,22 @@ class VisiteurRapportController extends AbstractController
            'rapports' => $repo->findBy([], [], $limit, $start),
            'pages' => $pages,
            'page' => $page
+        ]);
+    }
+   
+   
+   /**
+    * Permet d'afficher le formulaire d'edition
+    *
+    *@Route("/admin/rapports/{id}/edit" , name="admin_rapports_edit")
+    * @param RapportVisite $rapport
+    * @return Response
+    */
+    public function edit(RapportVisite $rapport){
+        $form = $this->createForm(RapportType::class, $rapport);
+        return $this->render('admin/rapport/edit.html.twig' , [
+            'rapport' => $rapport,
+            'form' => $form->createView()
         ]);
     }
 }
