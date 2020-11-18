@@ -21,7 +21,8 @@ class OffrirType extends AbstractType
                 ]
             ])
             ->add('medicament', EntityType::class, [
-                'class' => Medicament::class
+                'class' => Medicament::class,
+                'choice_label'=> 'libelle'
             ])
         ;
     }

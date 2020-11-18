@@ -87,4 +87,5 @@ class Medicament
 
         return $this;
     }
+
 }
