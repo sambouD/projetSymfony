@@ -4,11 +4,31 @@
 {% block body %}
 
 <div class="container">
-<h1>Modification du rapport du  {{rapport.rapdate | date('d/m/Y ')}}</h1>
-{{form_start(form)}}
+    <h1>Modification du rapport du {{rapport.rapdate | date('d/m/Y ')}}</h1>
+    {{form_start(form)}}
 
-{{form_widget(form)}}
+    <div class="row">
+        <div class="col">
+        <div class="card bg-light">
+        <div class="card header">
+        <h4><div class="card-title">Corriger le rapport ?</div></h4>
+        </div>
+        <div class="card-body">
+        {{form_widget(form)}}
+        </div>
+        
+        </div>
 
-{{form_end(form)}}
+        </div>
+        <div class="col">
+
+        </div>
+
+    </div>
+
+
+    
+
+    {{form_end(form)}}
 </div>
 {% endblock %}
