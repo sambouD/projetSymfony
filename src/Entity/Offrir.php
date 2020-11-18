@@ -63,6 +63,12 @@ class Offrir
         return $this;
     }
 
+
+   
+
+
+
+
     public function getRapportVisite(): ?RapportVisite
     {
         return $this->rapport_visite;
@@ -74,4 +80,5 @@ class Offrir
 
         return $this;
     }
+
 }

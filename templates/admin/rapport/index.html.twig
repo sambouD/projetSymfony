@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration des rapports!{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <h1 class="my-5">Gestion des rapports</h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Visiteur</th>
+                <th>Praticien</th>
+                <th >Date</th>
+                <th>Bilan</th>
+                <th>Motif</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rapport in rapports %}
+            <tr>
+                <td>{{rapport.id}}</td>
+                <td>{{rapport.visiteur.FullName}}</td>
+                <td>{{rapport.praticien.FullName}}</td>
+                <td>{{rapport.rapdate | date('d/m/Y H:i')}}</td>
+                <td>{{rapport.rapbilan}}</td>
+                <td>{{rapport.rapMotif}}</td>
+                <td>
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-center">
+        <ul class="pagination">
+            <li class="page-item {% if page == 1 %} disabled {% endif %}">
+                <a class="page-link" href="#">&laquo;</a>
+            </li>
+            {% for i in 1..pages %}
+            <li class="page-item {% if page == i %} active {% endif %}">
+                <a class="page-link" href="{{ path('visiteur_rapports_index', {'page': i})}}">{{i}}</a>
+            </li>
+            {% endfor %}
+            <li class="page-item">
+                <a class="page-link" href="#">&raquo;</a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+{% endblock %}
