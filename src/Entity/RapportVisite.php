@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -42,7 +43,7 @@ class RapportVisite
 
     /**
      * @ORM\Column(type="string", length=255)
-     * 
+     * @Assert\NotBlank(message= "Veuillez entrer un motif , merci d'avance !")
      */
     private $rap_motif;
 
@@ -55,12 +56,14 @@ class RapportVisite
     /**
      * @ORM\ManyToOne(targetEntity=Visiteur::class, inversedBy="rapport_visite")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message= "Vous devez choisir un visiteur")
      */
     private $visiteur;
 
     /**
      * @ORM\ManyToOne(targetEntity=Praticien::class, inversedBy="rapport_visite")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message= "Vous devez choisir un praticien")
      */
     private $praticien;
 

@@ -24,7 +24,7 @@
                 <td>{{rapport.id}}</td>
                 <td>{{rapport.visiteur.FullName}}</td>
                 <td>{{rapport.praticien.FullName}}</td>
-                <td>{{rapport.rapdate | date('d/m/Y H:i')}}</td>
+                <td>{{rapport.rapdate | date('d/m/Y')}}</td>
                 <td>{{rapport.rapbilan}}</td>
                 <td>{{rapport.rapMotif}}</td>
                 <td>
@@ -42,15 +42,15 @@
     <div class="d-flex justify-content-center">
         <ul class="pagination">
             <li class="page-item {% if page == 1 %} disabled {% endif %}">
-                <a class="page-link" href="#">&laquo;</a>
+                <a class="page-link" href="{{ path('visiteur_rapports_index', {'page': page - 1})}}">&laquo;</a>
             </li>
             {% for i in 1..pages %}
             <li class="page-item {% if page == i %} active {% endif %}">
                 <a class="page-link" href="{{ path('visiteur_rapports_index', {'page': i})}}">{{i}}</a>
             </li>
             {% endfor %}
-            <li class="page-item">
-                <a class="page-link" href="#">&raquo;</a>
+            <li class="page-item {% if page == pages %} disabled {% endif %}">
+                <a class="page-link" href="{{ path('visiteur_rapports_index', {'page': page + 1})}}">&raquo;</a>
             </li>
         </ul>
     </div>
