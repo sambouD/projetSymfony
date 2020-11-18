@@ -247,7 +247,7 @@ class Visiteur implements UserInterface
 
     public function getUsername()
     {
-        return $this->email;
+        return $this->login;
     }
 
     public function eraseCredentials() {}
