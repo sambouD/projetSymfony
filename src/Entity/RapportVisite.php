@@ -2,13 +2,23 @@
 
 namespace App\Entity;
 
-use App\Repository\RapportVisiteRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\RapportVisiteRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=RapportVisiteRepository::class)
+ * @UniqueEntity(
+ * fields={"rap_bilan"},
+ * message="Une autre rapport de visite possède déjâ ce bilan ! merci de le modifier"
+ * )
  */
 class RapportVisite
 {
@@ -21,16 +31,19 @@ class RapportVisite
 
     /**
      * @ORM\Column(type="date")
+     * 
      */
     private $rap_date;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=20, minMessage="Votre bilan doit faire plus de 20 caractères")
      */
     private $rap_bilan;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message= "Veuillez entrer un motif , merci d'avance !")
      */
     private $rap_motif;
 
@@ -43,12 +56,14 @@ class RapportVisite
     /**
      * @ORM\ManyToOne(targetEntity=Visiteur::class, inversedBy="rapport_visite")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message= "Vous devez choisir un visiteur")
      */
     private $visiteur;
 
     /**
      * @ORM\ManyToOne(targetEntity=Praticien::class, inversedBy="rapport_visite")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message= "Vous devez choisir un praticien")
      */
     private $praticien;
 
@@ -151,4 +166,8 @@ class RapportVisite
 
         return $this;
     }
+
+  
+
+
 }

@@ -55,11 +55,14 @@ class RapportController extends AbstractController
                 'success',
                 "Le rapport a bien été enregistrée ! "
             );
-            //  return $this->redirectToRoute();
+             return $this->redirectToRoute('visiteur_rapports_index'); // dans Controller/VisteurRapport
         }
 
         return $this->render('rapport/new.html.twig',[
             'form' => $form->createView()
         ]);
+
+       
     }
+   
 }

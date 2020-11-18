@@ -7,6 +7,7 @@ use App\Form\OffrirType;
 use App\Entity\Praticien;
 use App\Entity\Medicament;
 use App\Entity\RapportVisite;
+use App\Entity\Visiteur;
 use App\Form\ApplicationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -36,15 +37,25 @@ class RapportType extends ApplicationType
         ])
         ->add('praticien', EntityType::class, [
             'class' => Praticien::class,
-            'choice_label' =>  'nom' 
+            'choice_label' =>  'FullName',
+            'required'   => false
         ])
+        
+        ->add('visiteur', EntityType::class,[
+            'class' => Visiteur::class,
+            'choice_label' => 'FullName',
+            'required'   => false
+        ]) 
+
         ->add('rap_motif', ChoiceType::class, [
             'choices' => [
-                'Périodicité' => 0,
-                'Actualisation' => 1,
-                'Relance' => 2,
-                'Autre' => 3
-            ]
+                'Périodicité' => 'Périodicité',
+                'Actualisation' => 'Actualisation',
+                'Relance' => 'Relance',
+                'Autre' => 'Autre'
+            ],
+            'label' => 'Motif: ',
+            'required'   => false
 
         ])
         ->add('rap_bilan', 

@@ -162,6 +162,16 @@ class Visiteur implements UserInterface
         return $this;
     }
 
+    /**
+     * Recupere le nom et prenom 
+     *
+     * @return void
+     */
+    public function getFullName(){
+        return "{$this->nom} {$this->prenom}";
+    }
+
+    
     public function getLogin(): ?string
     {
         return $this->login;
