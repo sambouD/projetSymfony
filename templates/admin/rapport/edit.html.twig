@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Modification du rapport numéro{{rapport.id}}{% endblock %}
+{% form_theme form _self %}
+
 {% block body %}
 
 <div class="container">
@@ -9,19 +11,21 @@
 
     <div class="row">
         <div class="col">
-        <div class="card bg-light">
-        <div class="card header">
-        <h4><div class="card-title">Corriger le rapport ?</div></h4>
-        </div>
-        <div class="card-body">
-        {{form_widget(form)}}
-        <button type="submit" class="btn btn-primary">
-        <i class="fas fa-check"></i>
-        Enregistrer les modifications
-        </button>
-        </div>
-        
-        </div>
+            <div class="card bg-light">
+                <div class="card header">
+                    <h4>
+                        <div class="card-title">Corriger le rapport ?</div>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    {{form_widget(form)}}
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-check"></i>
+                        Enregistrer les modifications
+                    </button>
+                </div>
+
+            </div>
 
         </div>
         <div class="col">
@@ -31,8 +35,35 @@
     </div>
 
 
-    
+
 
     {{form_end(form)}}
+</div>
+{% endblock %}
+
+{% block _rapport_offrirs_widget %}
+{{form_widget(form)}}
+{% endblock %}
+
+{% block _rapport_offrirs_entry_row %}
+
+<div id="block_{{id}}">
+{{ form_widget(form) }}
+</div>
+{% endblock %}
+
+{% block _rapport_offrirs_entry_widget %}
+<div class="row align-items-center">
+    <div class="col-4">
+        {{form_row(form.off_qte) }}
+    </div>
+    <div class="col-6">
+        {{form_row(form.medicament) }}
+    </div>
+    <div class="col">
+    <button type="button" class="btn btn-danger" data-action="delete" data-target="#block_{{id}}">
+    <i class="fas fa-trash"></i>
+    </button>
+    </div>
 </div>
 {% endblock %}
