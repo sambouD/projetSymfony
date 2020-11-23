@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\RapportVisite;
 use App\Form\RapportType;
+use App\Entity\RapportVisite;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\RapportVisiteRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,8 +40,19 @@ class VisiteurRapportController extends AbstractController
     * @param RapportVisite $rapport
     * @return Response
     */
-    public function edit(RapportVisite $rapport){
+    public function edit(RapportVisite $rapport, Request $request, EntityManagerInterface $manager ){
         $form = $this->createForm(RapportType::class, $rapport);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $manager->persist($rapport);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "Le rapport <strong>{$rapport->getId()}<strong> à bien été enregistrer !"
+            );
+
+        }
         return $this->render('admin/rapport/edit.html.twig' , [
             'rapport' => $rapport,
             'form' => $form->createView()
