@@ -90,6 +90,18 @@ class Visiteurfixtures extends Fixture
             $manager->persist($visiteur);  
             $visiteurs[] = $visiteur; // Foreign Key
         }
+        $visiteur = new Visiteur();
+        $hash = $this->encoder->encodePassword($visiteur, 'password');
+        $visiteur->setNom('Mantellato')
+                 ->setPrenom('Xavier')
+                 ->setLogin('xmantellato')
+                 ->setMdp($hash)
+                 ->setAdresse('11 impasse de la ferme')
+                 ->setCp('78340')
+                 ->setVille('Les Clayes Sous Bois')
+                 ->setDateEmbouche($faker->dateTimeBetween('-20 years' , 'now'));
+        $manager->persist($visiteur);
+        $visiteurs[] = $visiteur;
 
     //Medicament
         $med = []; // Foreign Key
