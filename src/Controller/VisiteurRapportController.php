@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Controller;
-
+use App\Service\Pagination;
+use App\Service\PaginationService;
 use App\Form\RapportType;
 use App\Entity\RapportVisite;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,21 +15,29 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class VisiteurRapportController extends AbstractController
 {
     /**
-     * @Route("/admin/rapports/{page<\d+>?1}", name="visiteur_rapports_index")
+     * @Route("/rapports/{page<\d+>?1}", name="visiteur_rapports_index")
      */
-    public function index(RapportVisiteRepository $repo, $page)
+    public function index(RapportVisiteRepository $repo, $page, Pagination $pagination )
     {
-        $limit = 10;
+       /* $limit = 10;
         $start = $page * $limit - $limit;
 
         //Calcul des pages
         $total = count($repo->findAll());
-        $pages = ceil($total / $limit);
+        $pages = ceil($total / $limit);*/
+        $pagination->setEntityClass(RapportVisite::class)
+                ->setPage($page);
+               
 
-        return $this->render('admin/rapport/index.html.twig', [
+<<<<<<< HEAD
+        return $this->render('rapport/index.html.twig', [
            'rapports' => $repo->findBy([], [], $limit, $start),
            'pages' => $pages,
            'page' => $page
+=======
+        return $this->render('admin/rapport/index.html.twig', [
+          'pagination' =>$pagination
+>>>>>>> 63c4cfeea2f1bae4a65a619e48fc1ec3988a652f
         ]);
     }
    
@@ -36,7 +45,7 @@ class VisiteurRapportController extends AbstractController
    /**
     * Permet d'afficher le formulaire d'edition
     *
-    *@Route("/admin/rapports/{id}/edit" , name="admin_rapports_edit")
+    *@Route("/rapports/{id}/edit" , name="admin_rapports_edit")
     * @param RapportVisite $rapport
     * @return Response
     */
@@ -58,4 +67,35 @@ class VisiteurRapportController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * Permet de supprimer un rapport de visite ! 
+     *@Route("/admin/rapports/{id}/delete", name="admin_rapports_delete")
+     * @param RapportVisite $rapport
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
+    public function delete(RapportVisite $rapport, EntityManagerInterface $manager){
+        if (count($rapport->getOffrirs()) > 0) {
+           $this->addFlash(
+               'warning',
+               "Vous ne pouvez pas supprimer le rapport <strong>{$rapport->getId()} </strong> "
+
+           );
+        }
+
+        else{
+            $manager->remove($rapport);
+            $manager->flush();
+    
+            $this->addFlash(
+                'success',
+                "Le rapport <strong>{$rapport->getId()}</strong> a bien été supprimée ! "
+            );
+        }
+
+        return $this->redirectToRoute('visiteur_rapports_index');
+    }
+
+
 }
