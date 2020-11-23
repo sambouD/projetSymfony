@@ -9,6 +9,7 @@ use App\Entity\Offrir;
 use Faker\Factory;
 use App\Entity\Praticien;
 use App\Entity\RapportVisite;
+use App\Entity\Role;
 use App\Entity\Visiteur;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -26,6 +27,22 @@ class Visiteurfixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create('FR-fr');
+
+        $adminRole = new Role();
+        $adminRole->setTitle('ROLE_ADMIN');
+        $manager->persist($adminRole);
+
+        $adminUser = new Visiteur();
+        $adminUser->setNom('Mantellato')
+                  ->setPrenom('Xavier')
+                  ->setLogin('xmantellato')
+                  ->setMdp($this->encoder->encodePassword($adminUser, 'Password'))
+                  ->setAdresse('11 impasse de la ferme')
+                  ->setCp('78340')
+                  ->setVille('Les Clayes Sous Bois')
+                  ->setDateEmbouche($faker->dateTimeBetween('-20 years' , 'now'))
+                  ->addUserRole($adminRole);
+        $manager->persis($adminUser);
 
         //ActiviteComplet
         $activiteComplets = [];// Foreign Key
@@ -90,18 +107,6 @@ class Visiteurfixtures extends Fixture
             $manager->persist($visiteur);  
             $visiteurs[] = $visiteur; // Foreign Key
         }
-        $visiteur = new Visiteur();
-        $hash = $this->encoder->encodePassword($visiteur, 'password');
-        $visiteur->setNom('Mantellato')
-                 ->setPrenom('Xavier')
-                 ->setLogin('xmantellato')
-                 ->setMdp($hash)
-                 ->setAdresse('11 impasse de la ferme')
-                 ->setCp('78340')
-                 ->setVille('Les Clayes Sous Bois')
-                 ->setDateEmbouche($faker->dateTimeBetween('-20 years' , 'now'));
-        $manager->persist($visiteur);
-        $visiteurs[] = $visiteur;
 
     //Medicament
         $med = []; // Foreign Key

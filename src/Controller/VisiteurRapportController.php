@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class VisiteurRapportController extends AbstractController
 {
     /**
-     * @Route("/admin/rapports/{page<\d+>?1}", name="visiteur_rapports_index")
+     * @Route("/rapports/{page<\d+>?1}", name="visiteur_rapports_index")
      */
     public function index(RapportVisiteRepository $repo, $page)
     {
@@ -23,7 +23,7 @@ class VisiteurRapportController extends AbstractController
         $total = count($repo->findAll());
         $pages = ceil($total / $limit);
 
-        return $this->render('admin/rapport/index.html.twig', [
+        return $this->render('rapport/index.html.twig', [
            'rapports' => $repo->findBy([], [], $limit, $start),
            'pages' => $pages,
            'page' => $page
@@ -34,7 +34,7 @@ class VisiteurRapportController extends AbstractController
    /**
     * Permet d'afficher le formulaire d'edition
     *
-    *@Route("/admin/rapports/{id}/edit" , name="admin_rapports_edit")
+    *@Route("/rapports/{id}/edit" , name="admin_rapports_edit")
     * @param RapportVisite $rapport
     * @return Response
     */
