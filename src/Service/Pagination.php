@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
  * 
  * Elle nécessite après instanciation qu'on lui passe l'entité sur laquelle on souhaite travailler
  */
-class PaginationService{
+class Pagination{
 
     /**
      * Le nom de l'entité sur laquelle on veut effectuer une pagination 
@@ -125,12 +125,7 @@ class PaginationService{
         return $this->currentPage;
     }
 
-    /**
-     * Set de limit
-     *
-     * @param [type] $limit
-     * @return void
-     */
+
     public function setLimit($limit){
         $this->limit = $limit;
         
@@ -146,12 +141,7 @@ class PaginationService{
         return $this->limit;
     }
 
-    /**
-     * set de entityClass
-     *
-     * @param [type] $entityClass
-     * @return void
-     */
+
     public function setEntityClass($entityClass) {
         $this->entityClass = $entityClass;
 
