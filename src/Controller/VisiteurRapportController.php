@@ -39,7 +39,7 @@ class VisiteurRapportController extends AbstractController
    /**
     * Permet d'afficher le formulaire d'edition
     *
-    *@Route("/rapports/{id}/edit" , name="admin_rapports_edit")
+    *@Route("/rapports/{id}/edit" , name="rapports_edit")
     * @param RapportVisite $rapport
     * @return Response
     */
@@ -64,7 +64,11 @@ class VisiteurRapportController extends AbstractController
 
     /**
      * Permet de supprimer un rapport de visite ! 
+<<<<<<< HEAD
+     *@Route("/rapports/{id}/delete", name="rapports_delete")
+=======
      *@Route("/rapports/{id}/delete", name="admin_rapports_delete")
+>>>>>>> b02c7ced654d5b9f32ec0ba7b8d1162aa9bdf10e
      * @param RapportVisite $rapport
      * @param EntityManagerInterface $manager
      * @return Response

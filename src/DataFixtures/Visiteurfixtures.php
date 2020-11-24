@@ -42,7 +42,7 @@ class Visiteurfixtures extends Fixture
                   ->setVille('Les Clayes Sous Bois')
                   ->setDateEmbouche($faker->dateTimeBetween('-20 years' , 'now'))
                   ->addUserRole($adminRole);
-        $manager->persis($adminUser);
+        $manager->persist($adminUser);
 
         //ActiviteComplet
         $activiteComplets = [];// Foreign Key
