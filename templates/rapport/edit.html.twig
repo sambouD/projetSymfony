@@ -3,12 +3,13 @@
 {% block title %}Modification du rapport numéro{{rapport.id}}{% endblock %}
 {% block body %}
 
-<div class="container">
-    <h1>Modification du rapport du {{rapport.rapdate | date('d/m/Y ')}}</h1>
+<div class="container mt-2">
+    <h1 class="text-center">Modification du rapport du {{rapport.rapdate | date('d/m/Y ')}}</h1>
     {{form_start(form)}}
 
     <div class="row">
-        <div class="col">
+    <div class="col-md-3">&nbsp;</div>
+        <div class="col-md-6">
         <div class="card bg-light">
         <div class="card header">
         <h4><div class="card-title">Corriger le rapport ?</div></h4>
