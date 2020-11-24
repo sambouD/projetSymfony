@@ -29,15 +29,12 @@ class VisiteurRapportController extends AbstractController
                 ->setPage($page);
                
 
-<<<<<<< HEAD
+
+        
+
         return $this->render('rapport/index.html.twig', [
-           'rapports' => $repo->findBy([], [], $limit, $start),
-           'pages' => $pages,
-           'page' => $page
-=======
-        return $this->render('admin/rapport/index.html.twig', [
           'pagination' =>$pagination
->>>>>>> 63c4cfeea2f1bae4a65a619e48fc1ec3988a652f
+
         ]);
     }
    
@@ -62,7 +59,7 @@ class VisiteurRapportController extends AbstractController
             );
 
         }
-        return $this->render('admin/rapport/edit.html.twig' , [
+        return $this->render('rapport/edit.html.twig' , [
             'rapport' => $rapport,
             'form' => $form->createView()
         ]);
@@ -70,7 +67,7 @@ class VisiteurRapportController extends AbstractController
 
     /**
      * Permet de supprimer un rapport de visite ! 
-     *@Route("/admin/rapports/{id}/delete", name="admin_rapports_delete")
+     *@Route("/rapports/{id}/delete", name="admin_rapports_delete")
      * @param RapportVisite $rapport
      * @param EntityManagerInterface $manager
      * @return Response
