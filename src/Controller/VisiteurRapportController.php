@@ -52,7 +52,7 @@ class VisiteurRapportController extends AbstractController
                 'success',
                 "Le rapport <strong>{$rapport->getId()}<strong> à bien été enregistrer !"
             );
-
+            return $this->redirectToRoute('visiteur_rapports_index'); // dans Controller/VisteurRapport
         }
         return $this->render('rapport/edit.html.twig' , [
             'rapport' => $rapport,
