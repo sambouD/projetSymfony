@@ -32,7 +32,7 @@ class VisiteurRapportController extends AbstractController
         return $this->render('rapport/index.html.twig', [
           'pagination' =>$pagination ]);
     }
-
+    
     
    /**
     * Permet d'afficher le formulaire d'edition
