@@ -27,15 +27,14 @@ class OffrirType extends AbstractType
                 'choice_label'=> 'libelle',
             
             ])
-            ->add('rapport_visite', EntityType::class, [
+            /*->add('rapport_visite', EntityType::class, [
                 'class' => RapportVisite::class,
-                'choice_label' => 'rap_motif',
-                'attr' =>[
-                    'class' => 'hidden'
-                ]
+                'choice_label' => 'id',
+                'required'   => false
+                
            
                 
-            ])
+            ])*/
         ;
     }
 
