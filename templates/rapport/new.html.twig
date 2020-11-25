@@ -8,8 +8,9 @@
 
 {% block body %}
     
-    <div class="container">
-        <h1>Rapport de visite</h1>
+<div class="card">
+    <div  class="container mt-2">
+        <h1 class="text-center">Rapport de visite</h1>
 
         {{ form_start(form) }}
 
@@ -20,7 +21,7 @@
 
         {{ form_end(form) }}
     </div>
-
+</div>
 {% endblock %}
 {% block _rapport_offrirs_widget %}
     <p>Ici, vous pouvez ajouter vos propres medicament ! </p>
