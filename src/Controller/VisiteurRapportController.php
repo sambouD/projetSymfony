@@ -28,13 +28,12 @@ class VisiteurRapportController extends AbstractController
         $pagination->setEntityClass(RapportVisite::class)
                 ->setPage($page);
                
-   
+
         return $this->render('rapport/index.html.twig', [
-          'pagination' =>$pagination
-        ]);
+          'pagination' =>$pagination ]);
     }
-   
-   
+
+    
    /**
     * Permet d'afficher le formulaire d'edition
     *
@@ -63,10 +62,7 @@ class VisiteurRapportController extends AbstractController
 
     /**
      * Permet de supprimer un rapport de visite ! 
-
-
-     *@Route("/rapports/{id}/delete", name="admin_rapports_delete")
-
+     * @Route("/rapports/{id}/delete", name="rapports_delete")
      * @param RapportVisite $rapport
      * @param EntityManagerInterface $manager
      * @return Response
