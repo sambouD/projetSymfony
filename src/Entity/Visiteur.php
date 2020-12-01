@@ -251,9 +251,9 @@ class Visiteur implements UserInterface
     }
 
     public function getRoles() {
-        $roles = $this->userRoles->toArray();
+       // $roles = $this->userRoles->toArray();
 
-        dump($roles);
+        //dump($roles);
 
         /*$roles = $this->userRoles->map(function($role){
             return $role->getTitle();
@@ -261,7 +261,7 @@ class Visiteur implements UserInterface
 
         dump($roles);*/
 
-        die();
+       // die();
 
         return ['ROLE_USER'];
     }
