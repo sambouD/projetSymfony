@@ -4,10 +4,10 @@
 
 {% block body %}
 
-<div class="container-fluid">
-    <h1 class="my-5">Gestion des rapports</h1>
+<div class="container-fluid" id="image">
+    <h1 class="my-5"  id="text">Gestion des rapports</h1>
     <table class="table table-hover">
-        <thead>
+        <thead id="pink">
             <tr>
                 <th>Id</th>
                 <th>Visiteur</th>
@@ -21,12 +21,13 @@
         <tbody>
             {% for rapport in pagination.data %}
             <tr>
-                <td>{{rapport.id}}</td>
-                <td>{{rapport.visiteur.FullName}}</td>
-                <td>{{rapport.praticien.FullName}}</td>
-                <td>{{rapport.rapdate | date('d/m/Y')}}</td>
-                <td>{{rapport.rapbilan}}</td>
-                <td>{{rapport.rapMotif}}</td>
+                <td><strong>{{rapport.id}} </strong></td>
+                <td><strong>{{rapport.visiteur.FullName}}</strong></td>
+                <td><strong>{{rapport.praticien.FullName}}</strong></td>
+                <td><strong>{{rapport.rapdate | date('d/m/Y')}}</strong></td>
+                <td><strong>{{rapport.rapbilan}}</strong></td>
+                <td><strong>{{rapport.rapMotif}}</strong></td>
+               
                 <td>
                     <a href="{{path('rapports_edit',{'id': rapport.id})}}" class="btn btn-primary">
                         <i class="fas fa-edit"></i>

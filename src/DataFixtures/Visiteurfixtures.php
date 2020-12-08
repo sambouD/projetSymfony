@@ -44,6 +44,17 @@ class Visiteurfixtures extends Fixture
                   ->addUserRole($adminRole);
         $manager->persist($adminUser);
 
+
+        
+
+
+
+
+
+
+
+
+
         //ActiviteComplet
         $activiteComplets = [];// Foreign Key
 
@@ -93,7 +104,7 @@ class Visiteurfixtures extends Fixture
             $ville = $faker->city(); 
             $dateEmbauche = $faker->dateTimeBetween('-20 years' , 'now');        
             
-            $hash = $this->encoder->encodePassword($visiteur, $mdp);
+            $hash = $this->encoder->encodePassword($visiteur, 'Password');
 
             $visiteur->setNom($faker->lastName())
                      ->setPrenom($faker->lastName($genres[mt_rand(0,1)]))

@@ -27,9 +27,13 @@ class RapportType extends ApplicationType
         $builder
         ->add('id', IntegerType::class, 
         $this->getConfiguration('Numéro: ', "Veuillez saisir le numéro",[
-            'required' => false
+            'required' => false,
+            'attr' => [
+                'class' => 'hidden'
+            ]
         ]
-        ))
+        )
+        )
         ->add('rap_date', 
             DateType::class,[
             'widget' => 'single_text',
