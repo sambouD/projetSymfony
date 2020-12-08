@@ -18,8 +18,10 @@
           Rapport de visite
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        {% if is_granted('ROLE_USER') %}
           <a class="dropdown-item" href="{{ path('visiteur_rapports_index') }}">Consulter les rapport</a>
           <a class="dropdown-item" href="{{ path('rapports_create') }}">Ajouter un rapport</a>
+          {% endif %}
         </div>
       </li>
 </ul>

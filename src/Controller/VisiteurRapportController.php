@@ -8,8 +8,10 @@ use App\Entity\RapportVisite;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\RapportVisiteRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class VisiteurRapportController extends AbstractController
@@ -38,6 +40,7 @@ class VisiteurRapportController extends AbstractController
     * Permet d'afficher le formulaire d'edition
     *
     *@Route("/rapports/{id}/edit" , name="rapports_edit")
+    * @Security ("is_granted('ROLE_USER') and user === rapport.getVisiteur()", message="le rapport n'est pas de vous ! vous ne pouvez pas le modifier")
     * @param RapportVisite $rapport
     * @return Response
     */
@@ -62,7 +65,9 @@ class VisiteurRapportController extends AbstractController
 
     /**
      * Permet de supprimer un rapport de visite ! 
+     * 
      * @Route("/rapports/{id}/delete", name="rapports_delete")
+     * @Security user === rapport.getVisiteur()", message="le rapport  est pas vous ! vous ne pouvez pas la modifier")
      * @param RapportVisite $rapport
      * @param EntityManagerInterface $manager
      * @return Response
