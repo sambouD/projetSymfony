@@ -67,7 +67,6 @@ class VisiteurRapportController extends AbstractController
      * Permet de supprimer un rapport de visite ! 
      * 
      * @Route("/rapports/{id}/delete", name="rapports_delete")
-     * @Security user === rapport.getVisiteur()", message="le rapport  est pas vous ! vous ne pouvez pas la modifier")
      * @param RapportVisite $rapport
      * @param EntityManagerInterface $manager
      * @return Response

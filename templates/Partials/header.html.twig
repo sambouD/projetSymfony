@@ -14,23 +14,36 @@
       </li>
 
       <li class="nav-item dropdown">
+       {% if is_granted('ROLE_USER')  %}
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Rapport de visite
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        {% if is_granted('ROLE_USER') %}
+
+        
+
+       
+
           <a class="dropdown-item" href="{{ path('visiteur_rapports_index') }}">Consulter les rapport</a>
+      
           <a class="dropdown-item" href="{{ path('rapports_create') }}">Ajouter un rapport</a>
-          {% endif %}
+
+         {% endif %}
+
         </div>
       </li>
 </ul>
-        <a class="nav-link" href="{{ path('account_login') }}">Se connecter
-          <span class="sr-only">(current)</span>
-        </a>
-    
-
-    
+  <ul class="navbar-nav ml-auto">
+        {% if app.user %}
+          <li class="nav-item dropdown">
+            <a href="{{ path('account_logout')}}" class="nav-link">Déconnexion</a>
+          </li>
+        {% else %}
+          <li class="nav-item dropdown">
+            <a href="{{ path('account_login')}}" class="nav-link">Se connecter</a>
+          </li>
+        {% endif %}
+    </ul>
   </div>
 </nav>
 

@@ -1,3 +1,10 @@
 .hidden{
     display:  none;
 }
+
+#pink{
+    background-color: pink;
+}
+#text{
+    text-align: center;
+}

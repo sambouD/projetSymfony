@@ -19,10 +19,14 @@ class AccountController extends AbstractController
     public function login(AuthenticationUtils $utils): Response
     {
         $error = $utils->getLastAuthenticationError();
-
+        
+        
         return $this->render('account/login.html.twig', [
             'hasError' => $error !== null
         ]);
+
+        return $this->redirectToRoute('visiteur_rapports_index'); // dans Controller/VisteurRapport
+       
     }
 
 
