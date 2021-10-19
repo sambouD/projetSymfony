@@ -20,13 +20,12 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-        
-
-       
-
           <a class="dropdown-item" href="{{ path('visiteur_rapports_index') }}">Consulter les rapport</a>
       
           <a class="dropdown-item" href="{{ path('rapports_create') }}">Ajouter un rapport</a>
+          <a class="dropdown-item" href="{{ path('nb_rapport') }}">Nb de rapport Visiteur</a>
+            <a class="dropdown-item" href="{{ path('praticien_nb_rapport') }}">Nb de rapport Praticien</a>
+             <a class="dropdown-item" href="{{ path('nbpraticien_region') }}">Praticiens par région</a>
 
          {% endif %}
 

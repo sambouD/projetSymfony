@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration des rapports!{% endblock %}
+
+{% block body %}
+
+{% set total = 0 %}
+
+<div class="container-fluid" id="image">
+    <h1 class="my-5"  id="text">Nombre de rapport de visite</h1>
+    <table class="table table-hover">
+        <thead id="pink">
+            <tr>
+               
+                <th>nom</th>
+                <th>NbRapport</th> 
+            </tr>
+        </thead>
+        <tbody>
+            {% for praticien_nb_rapport in praticien_nb_rapports %}
+            <tr>
+              
+             
+                  <td><strong>{{praticien_nb_rapport.nom}} </strong></td>
+                  <td><strong>{{praticien_nb_rapport.praticienNbRapports}} </strong></td>
+                   
+        
+        </tr>
+
+            {% set total = total + praticien_nb_rapport.praticienNbRapports %}
+           {% endfor %}
+        </tbody>
+        <tfoot id="pink">
+        <tr>
+            <th >Nb total de rapport</th>
+              <th><strong>{{total}} </strong></th>
+        </tr>
+      
+                        
+      
+       
+        </tfoot>
+    </table>
+
+{% endblock %}

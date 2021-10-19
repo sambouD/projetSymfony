@@ -22,19 +22,32 @@ class RapportVisiteRepository extends ServiceEntityRepository
     // /**
     //  * @return RapportVisite[] Returns an array of RapportVisite objects
     //  */
-    /*
-    public function findByExampleField($value)
+  
+   public function NbRapportVisite()
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
+            ->select('v.matricule', 'v.nom', 'count(r.id) as nbRapports') // Le nombre de rapports des visiteurs
+            ->innerJoin('r.visiteur',  'v')
+            ->orderBy('v.nom', 'ASC')
+            ->groupBy('v.matricule','v.nom')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
+  
+    public function PraticienNbRapport()
+    {
+        return $this->createQueryBuilder('r')
+            ->select('p.nom','count(r.id) as praticienNbRapports') // Le nombre de rapports  des praticiens
+            ->innerJoin('r.praticien',  'p')
+            ->orderBy('p.nom', 'ASC')
+            ->groupBy('p.nom')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+   
 
     /*
     public function findOneBySomeField($value): ?RapportVisite

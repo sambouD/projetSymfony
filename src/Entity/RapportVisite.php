@@ -67,6 +67,16 @@ class RapportVisite
      */
     private $praticien;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Motif::class, inversedBy="rapportVisites")
+     */
+    private $motif;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Lieux::class, inversedBy="rapportVisite")
+     */
+    private $lieux;
+
     public function __construct()
     {
         $this->offrirs = new ArrayCollection();
@@ -163,6 +173,30 @@ class RapportVisite
     public function setPraticien(?Praticien $praticien): self
     {
         $this->praticien = $praticien;
+
+        return $this;
+    }
+
+    public function getMotif(): ?Motif
+    {
+        return $this->motif;
+    }
+
+    public function setMotif(?Motif $motif): self
+    {
+        $this->motif = $motif;
+
+        return $this;
+    }
+
+    public function getLieux(): ?Lieux
+    {
+        return $this->lieux;
+    }
+
+    public function setLieux(?Lieux $lieux): self
+    {
+        $this->lieux = $lieux;
 
         return $this;
     }

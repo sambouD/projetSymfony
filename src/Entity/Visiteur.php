@@ -75,6 +75,11 @@ class Visiteur implements UserInterface
      */
     private $userRoles;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $matricule;
+
     public function __construct()
     {
         $this->rapport_visite = new ArrayCollection();
@@ -303,6 +308,18 @@ class Visiteur implements UserInterface
         if ($this->userRoles->removeElement($userRole)) {
             $userRole->removeUser($this);
         }
+
+        return $this;
+    }
+
+    public function getMatricule(): ?string
+    {
+        return $this->matricule;
+    }
+
+    public function setMatricule(string $matricule): self
+    {
+        $this->matricule = $matricule;
 
         return $this;
     }

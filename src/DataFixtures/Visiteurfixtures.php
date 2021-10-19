@@ -4,12 +4,16 @@ namespace App\DataFixtures;
 
 use App\Entity\ActiviteComplet;
 use App\Entity\Inviter;
+use App\Entity\Lieux;
 use App\Entity\Medicament;
+use App\Entity\Motif;
 use App\Entity\Offrir;
 use Faker\Factory;
 use App\Entity\Praticien;
 use App\Entity\RapportVisite;
+use App\Entity\Region;
 use App\Entity\Role;
+use App\Entity\Specialite;
 use App\Entity\Visiteur;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -45,12 +49,7 @@ class Visiteurfixtures extends Fixture
         $manager->persist($adminUser);
 
 
-        
-
-
-
-
-
+    
 
 
 
@@ -73,6 +72,32 @@ class Visiteurfixtures extends Fixture
             $manager->persist($activiteComplet);
             $activiteComplets[] = $activiteComplet; // Foreign Key
         }
+         // Lieux 
+    $specialites= [];
+    $lesSpecialites= ["généraliste", "Dentiste", "Docteur", "Scientifique", "Autre"];
+    for ($i=0; $i <=4 ; $i++) { 
+        
+        $specialite = new Specialite();
+
+        $specialite->setLibelle($lesSpecialites[$i]);
+
+        $manager->persist($specialite);
+        $specialites[] = $specialite;
+    }
+
+    $regions = [];
+    $lesRegions=["Alsace", "Aquitaine", "Auvergne", "Lorraine","Autre"];
+    for ($i=0; $i <=4 ; $i++) { 
+        
+        $region = new Region();
+
+        $region->setLibelle($lesRegions[$i]);
+
+        $manager->persist($region);
+        $regions[] = $region;
+    }
+
+
 
         //Praticien
         $genres = ["male" , "female"];
@@ -84,7 +109,9 @@ class Visiteurfixtures extends Fixture
             
 
             $praticien->setNom($faker->lastName())
-                      ->setPrenom($faker->lastName($genres[mt_rand(0,1)]));
+                      ->setPrenom($faker->lastName($genres[mt_rand(0,1)]))
+                      ->setSpecialite( $specialites[mt_rand(0,4)])
+                      ->setRegion($regions[mt_rand(0,4)]);
             
             $manager->persist($praticien);
             $praticiens[] = $praticien; // Foreign Key
@@ -102,7 +129,8 @@ class Visiteurfixtures extends Fixture
             $adresse = $faker->address();
             $cp = $faker->postcode();
             $ville = $faker->city(); 
-            $dateEmbauche = $faker->dateTimeBetween('-20 years' , 'now');        
+            $dateEmbauche = $faker->dateTimeBetween('-20 years' , 'now'); 
+            $matricule = $faker->isbn10();     
             
             $hash = $this->encoder->encodePassword($visiteur, 'Password');
 
@@ -113,7 +141,8 @@ class Visiteurfixtures extends Fixture
                      ->setAdresse($adresse)
                      ->setCp($cp)
                      ->setVille($ville)
-                     ->setDateEmbouche($dateEmbauche);
+                     ->setDateEmbouche($dateEmbauche)
+                     ->setMatricule($matricule);
         
             $manager->persist($visiteur);  
             $visiteurs[] = $visiteur; // Foreign Key
@@ -138,6 +167,37 @@ class Visiteurfixtures extends Fixture
         $med[] = $medicament; // Foreign Key
     }
 
+       //Motif
+ $Motifs = [];
+ $lesmotifs = ["VisitePonctuelle", "Mensuelle", "VisiteTrimestrielle", "Semestriel", "Autre"];
+    for ($i=0; $i <=4; $i++) { 
+
+        $motif = new Motif();
+
+        $motif->setLibelle($lesmotifs[$i]);
+
+
+        $manager->persist($motif);
+        $Motifs[] = $motif;
+    }
+
+
+    // Lieux 
+    $lieux = [];
+    $leslieux = ["Tour Eiffel", "Musée du Louvre", "Arc de triomphe", "Champs Elyseés", "Autre"];
+    for ($i=0; $i <=4 ; $i++) { 
+        
+        $lieu = new Lieux();
+
+        $lieu->setLibelle($leslieux[$i]);
+
+        $manager->persist($lieu);
+        $lieux[] = $lieu;
+    }
+
+   
+
+
     //rapport_visite
     $rapport_visites = []; // Foreign Key
     $rap_motif = ["Périodicité", "Actualisation", "Relance", "Sollicitation praticien", "Autre"];
@@ -152,11 +212,16 @@ class Visiteurfixtures extends Fixture
                         ->setPraticien($praticiens[mt_rand(0,30)])
                         ->setRapDate($rap_date)
                         ->setRapBilan($rap_bilan)
-                        ->setRapMotif($rap_motif[mt_rand(0,4)]);
+                        ->setRapMotif($rap_motif[mt_rand(0,4)])
+                        ->setMotif($Motifs[mt_rand(0,4)])
+                        ->setLieux($lieux[mt_rand(0,4)]);
 
         $manager->persist($rapport_visite); 
         $rapport_visites[] = $rapport_visite; // Foreign Key
     }
+
+ 
+
 
     //Inviter
     for ($i=0; $i <= 30 ; $i++) { 
@@ -186,8 +251,6 @@ class Visiteurfixtures extends Fixture
     
         $manager->persist($offrir);
     }
-
-
 
 
 

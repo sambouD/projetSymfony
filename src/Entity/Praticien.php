@@ -39,6 +39,16 @@ class Praticien
      */
     private $prenom;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Specialite::class, inversedBy="praticien")
+     */
+    private $specialite;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="praticien")
+     */
+    private $region;
+
     public function __construct()
     {
         $this->rapport_visite = new ArrayCollection();
@@ -141,6 +151,30 @@ class Praticien
      */
     public function getFullName(){
         return "{$this->nom} {$this->prenom}";
+    }
+
+    public function getSpecialite(): ?Specialite
+    {
+        return $this->specialite;
+    }
+
+    public function setSpecialite(?Specialite $specialite): self
+    {
+        $this->specialite = $specialite;
+
+        return $this;
+    }
+
+    public function getRegion(): ?Region
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?Region $region): self
+    {
+        $this->region = $region;
+
+        return $this;
     }
 
 }

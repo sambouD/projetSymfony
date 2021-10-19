@@ -9,13 +9,16 @@
     <table class="table table-hover">
         <thead id="pink">
             <tr>
-
                 <th>Id</th>
                 <th>Visiteur</th>
                 <th>Praticien</th> 
                 <th >Date</th>
                 <th>Bilan</th>
                 <th>Motif</th>
+                <th>MotifPériocité</th>
+                 <th>Lieux</th>
+                <th>Spécialités</th>
+                 <th>Régions</th>
                 <th>Action</th>
                 
             </tr>
@@ -29,6 +32,10 @@
                 <td><strong>{{rapport.rapdate | date('d/m/Y')}}</strong></td>
                 <td><strong>{{rapport.rapbilan}}</strong></td>
                 <td><strong>{{rapport.rapMotif}}</strong></td>
+                 <td><strong>{{rapport.Motif.libelle}}</strong></td>
+                  <td><strong>{{rapport.Lieux.libelle}}</strong></td>
+                   <td><strong>{{rapport.praticien.specialite.libelle}}</strong></td>
+                   <td><strong>{{rapport.praticien.region.libelle}}</strong></td>
                
                 <td>
                     <a href="{{path('rapports_edit',{'id': rapport.id})}}" class="btn btn-primary">
@@ -38,8 +45,6 @@
                     <a href="{{ path('rapports_delete', {'id' : rapport.id}) }}" class="btn btn-danger"
                     onclick="return confirm('Êtes vous sur de vouloir supprimer le rapport : {{rapport.Id}} ?')"
                     ><i class="fas fa-trash"></i></a>
-
-                
                 </td>
             </tr>
             {% endfor %}

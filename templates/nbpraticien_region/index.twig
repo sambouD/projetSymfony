@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration des rapports!{% endblock %}
+
+{% block body %}
+
+{% set total = 0 %} <!-- on crée un variable total -->
+
+<div class="container-fluid" id="image">
+    <h1 class="my-5"  id="text">Nombre de praticien par région</h1>
+    <table class="table table-hover">
+        <thead id="pink">
+            <tr>
+               
+                <th>Nom de la région</th>
+                <th>NbPraticien</th> 
+            </tr>
+        </thead>
+        <tbody>
+
+            <!-- on met les infos de la requête sql dans la RegionRepository-->
+            {% for nbpraticien_region in nbpratiens %}
+            <tr>
+              
+                  <td><strong>{{nbpraticien_region.libelle}} </strong></td>   <!-- le nom de la région-->
+                  <td><strong>{{ nbpraticien_region.nbPraticiens }} </strong></td> <!--le nombre praticien par région -->
+                   
+        
+        </tr>
+
+            {% set total = total + nbpraticien_region.nbPraticiens %}  <!-- On addition le nombre de praticien par région -->
+           {% endfor %}
+        </tbody>
+        <tfoot id="pink">
+        <tr>
+            <th >Nb total de praticien par région</th>
+              <th><strong>{{total}} </strong></th>
+
+              
+        </tr>
+      
+                        
+      
+       
+        </tfoot>
+    </table>
+<a class="" href="{{ path('visiteur_rapports_index') }}">Consulter les rapport</a>
+{% endblock %}

@@ -2,12 +2,15 @@
 
 namespace App\Form;
 
+use App\Entity\Lieux;
+use App\Entity\Motif;
 use App\Entity\Offrir;
+use App\Entity\Visiteur;
 use App\Form\OffrirType;
 use App\Entity\Praticien;
 use App\Entity\Medicament;
 use App\Entity\RapportVisite;
-use App\Entity\Visiteur;
+use App\Entity\Specialite;
 use App\Form\ApplicationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -50,6 +53,21 @@ class RapportType extends ApplicationType
             'choice_label' => 'FullName',
             'required'   => false
         ]) 
+        
+         //Juste met ça  pour faire apparaître les motifs dans le formulaire d'ajoute
+        ->add('motif', EntityType::class,[
+            'class' => Motif::class,
+            'choice_label' => 'libelle',
+            'required'   => false
+        ])
+        
+        //Juste met ça pour faire apparaître les lieux dans le formulaire d'ajoute
+        ->add('lieux', EntityType::class, [
+            'class' => Lieux::class,
+            'choice_label' => 'libelle',
+            'required'   => false
+        ]
+        )
 
         ->add('rap_motif', ChoiceType::class, [
             'choices' => [
@@ -58,7 +76,7 @@ class RapportType extends ApplicationType
                 'Relance' => 'Relance',
                 'Autre' => 'Autre'
             ],
-            'label' => 'Motif: ',
+            'label' => 'Rapport_motif: ',
             'required'   => false
 
         ])

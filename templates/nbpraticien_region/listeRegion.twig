@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration des rapports!{% endblock %}
+
+{% block body %}
+
+
+<div class="container-fluid" id="image">
+    <h1 class="my-5"  id="text">Les régions</h1>
+    <table class="table table-hover">
+        <thead id="pink">
+            <tr>
+                <th>Id</th> 
+                <th>Nom de la région</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+
+            <!-- on met les infos de la requête sql dans la RegionRepository-->
+            {% for nbpraticien_region in regions %}
+            <tr>
+              
+                  <td><strong>{{nbpraticien_region.id}} </strong></td>   <!-- le nom de la région-->
+                  <td><strong>{{ nbpraticien_region.libelle }} </strong></td> <!--le nombre praticien par région -->
+                   
+        
+        </tr>
+
+           {% endfor %}
+        </tbody>
+        <tfoot id="pink">
+                        
+      
+       
+        </tfoot>
+    </table>
+<a class="" href="{{ path('visiteur_rapports_index') }}">Consulter les rapport</a>
+{% endblock %}
